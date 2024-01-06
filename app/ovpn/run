@@ -7,26 +7,25 @@ if [ ! -f "${OPENVPN_CONFIG_FILE}" ] ; then
     exit 1
 fi
 
-# Add ovpn user/pass
-if ! [ -z ${OPENVPN_USERNAME} ]; then
-    echo "$OPENVPN_USERNAME" >"${TEMP_DIR}/openvpn-credentials.txt"
-    echo "$OPENVPN_PASSWORD" >>"${TEMP_DIR}/openvpn-credentials.txt"
-    chmod 600 "${TEMP_DIR}/openvpn-credentials.txt"
-
-    if [ "${OPENVPN_AUTO_CONFIG}" == "true" ]; then
-        grep -v "auth-user-pass" <"${OPENVPN_CONFIG_FILE}" >"${TEMP_DIR}/config.ovpn"
-        echo "auth-user-pass ${TEMP_DIR}/openvpn-credentials.txt" >>"${TEMP_DIR}/config.ovpn"
-    fi
-fi
 
 if [ ! -f "${TEMP_DIR}/config.ovpn" ]; then
     cp "${OPENVPN_CONFIG_FILE}" "${TEMP_DIR}/config.ovpn"
 fi
 
-if ! openvpn --config "${TEMP_DIR}/config.ovpn"; then
-    exit_code=$?
-    echo "OpenVPN failed"
-    sleep 5
-    exit $exit_code
+# Add ovpn user/pass
+if ! [ -z ${OPENVPN_USERNAME} ]; then
+    # https://stackoverflow.com/questions/38869427/openvpn-on-linux-passing-username-and-password-in-command-line
+    if ! openvpn --config "${TEMP_DIR}/config.ovpn" --auth-user-pass <(echo -e "$OPENVPN_USERNAME\\n$OPENVPN_PASSWORD"); then
+        exit_code=$?
+        echo "OpenVPN failed"
+        sleep 5
+        exit $exit_code
+    fi
+else
+    if ! openvpn --config "${TEMP_DIR}/config.ovpn"; then
+        exit_code=$?
+        echo "OpenVPN failed"
+        sleep 5
+        exit $exit_code
+    fi
 fi
-
