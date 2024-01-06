@@ -15,7 +15,7 @@ fi
 # Add ovpn user/pass
 if ! [ -z ${OPENVPN_USERNAME} ]; then
     # https://stackoverflow.com/questions/38869427/openvpn-on-linux-passing-username-and-password-in-command-line
-    openvpn --config "${TEMP_DIR}/config.ovpn" --auth-user-pass <(echo -e "$OPENVPN_USERNAME\\n$OPENVPN_PASSWORD")
+    sudo bash -c "openvpn --config ${TEMP_DIR}/config.ovpn --auth-user-pass <(echo -e "$OPENVPN_USERNAME\\\\n$OPENVPN_PASSWORD")"
 else
     if ! openvpn --config "${TEMP_DIR}/config.ovpn"; then
         exit_code=$?
