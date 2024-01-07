@@ -91,3 +91,8 @@ Here are the differences from the original:
 - Automatic builds
 
 And other minor changes.
+
+## Etc.
+you can use externally with socat 
+read this:
+- https://stackoverflow.com/questions/41555683/how-can-i-redirect-a-single-port-in-a-docker-container-to-the-containers-host
