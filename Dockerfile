@@ -1,6 +1,11 @@
-FROM alpine:latest
+FROM <<BASECONTAINER>>
+#FROM alpine:latest
 
-RUN apk --update --upgrade --no-cache add \
+MAINTAINER docker@intrepid.de
+
+USER root
+RUN passwd -l root ; \
+    apk --update --upgrade --no-cache add \
     sudo \
     bash \
     gettext \
