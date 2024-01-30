@@ -1,6 +1,6 @@
-FROM alpine:3.14.2
+FROM alpine:latest
 
-RUN apk --no-cache add \
+RUN apk --update --upgrade --no-cache add \
     sudo \
     bash \
     gettext \
@@ -18,6 +18,7 @@ ENV LOCAL_NETWORK= \
     OPENVPN_PASSWORD= \
     OPENVPN_PROXY_PORT=8080 \
     OPENVPN_TUNNEL_HOSTS= \
-    OPENVPN_USERNAME=
+    OPENVPN_USERNAME= \
+    OPENVPN_INTERFACE=eth0
 
 CMD ["runsvdir", "/app"]

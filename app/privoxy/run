@@ -13,7 +13,7 @@ envsubst </app/privoxy/config >"${TEMP_DIR}/config"
 
 # so return traffic that went through VPN works
 gw=$(ip route | awk '/default/ {print $3}')
-ip route add to ${LOCAL_NETWORK} via $gw dev eth0
+ip route add to ${LOCAL_NETWORK} via $gw dev ${OPENVPN_INTERFACE}
 
 # start
 privoxy --no-daemon "${TEMP_DIR}/config"
