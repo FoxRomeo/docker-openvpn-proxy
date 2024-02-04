@@ -9,7 +9,7 @@ sleep 10
 
 export TEMP_DIR="$(mktemp -d)"
 
-envsubst </app/privoxy/config >"${TEMP_DIR}/config"
+envsubst <${PRIVOXY_CONFIG} >"${TEMP_DIR}/config"
 
 # so return traffic that went through VPN works
 gw=$(ip route | awk '/default/ {print $3}')

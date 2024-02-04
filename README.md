@@ -42,6 +42,8 @@ Pass values for `docker-compose` in `environment` or to `docker run` with `-e "<
 | `OPENVPN_TUNNEL_HOSTS` | No | _none_ | `*.corp.com,*.corp.io` | Patterns of which hosts to tunnel, comma separated. Unset means everything is tunneled. See [Split Tunneling](#split-tunneling) |
 | `OPENVPN_HOST` | No | `localhost` | `10.0.8.1` | Set this if this container runs on a different host to where you'll use it. |
 | `OPENVPN_PROXY_PORT` | No | `8080` | `1234` | Change proxy listening port. This must match the host port so that the auto-config file is correct. |
+| `OPENVPN_INTERFACE` | No | `eth0` | `wlan0` | Change interface. This must match the host interface. |
+| `PRIVOXY_CONFIG` | No | `/app/privoxy/config` | `/etc/privoxy/config` | Change proxy configfile.|
 
 ### Ports
 

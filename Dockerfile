@@ -9,7 +9,7 @@ RUN passwd -l root ; \
     bash \
     gettext \
     nginx \
-    openvpn \ 
+    openvpn \
     privoxy \
     runit
 
@@ -23,6 +23,7 @@ ENV LOCAL_NETWORK= \
     OPENVPN_PROXY_PORT=8080 \
     OPENVPN_TUNNEL_HOSTS= \
     OPENVPN_USERNAME= \
-    OPENVPN_INTERFACE=eth0
+    OPENVPN_INTERFACE=eth0 \
+    PRIVOXY_CONFIG=/app/privoxy/config
 
 CMD ["runsvdir", "/app"]
