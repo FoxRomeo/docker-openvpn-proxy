@@ -1,6 +1,6 @@
 version: "3"
 
-# Try `docker-compose up`
+# Try `docker-compose up -d`
 
 services:
     ovpn_proxy:

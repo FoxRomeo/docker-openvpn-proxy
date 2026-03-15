@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-MAINTAINER docker@intrepid.de
+LABEL maintainer="docker@intrepid.de"
 
 USER root
 RUN passwd -l root ; \
